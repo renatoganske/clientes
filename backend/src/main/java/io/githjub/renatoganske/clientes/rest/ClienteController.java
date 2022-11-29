@@ -22,14 +22,26 @@ public class ClienteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente save(@RequestBody  Cliente cliente) {
+    public Cliente save(@RequestBody Cliente cliente) {
         return repository.save(cliente);
     }
 
     @GetMapping("{id}")
-    public Cliente findById(@PathVariable Integer id){
+    public Cliente findById(@PathVariable Integer id) {
         return repository
                 .findById(id)
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Integer id) {
+        repository
+                .findById(id)
+                .map(cliente -> {
+                    repository.delete(cliente);
+                    return Void.TYPE;
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 }
