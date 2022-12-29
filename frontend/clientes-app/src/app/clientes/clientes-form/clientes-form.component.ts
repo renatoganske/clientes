@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';	
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Cliente } from '../cliente';
 import { ClientesService } from '../../clientes.service';
@@ -7,39 +7,61 @@ import { ClientesService } from '../../clientes.service';
 @Component({
   selector: 'app-clientes-form',
   templateUrl: './clientes-form.component.html',
-  styleUrls: ['./clientes-form.component.css']
+  styleUrls: ['./clientes-form.component.css'],
 })
 export class ClientesFormComponent implements OnInit {
-
   cliente: Cliente;
   success: boolean = false;
   errors: String[];
+  id: number;
 
-  constructor( private service: ClientesService,
-    private router: Router) {
+  constructor(
+    private service: ClientesService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.cliente = new Cliente();
   }
 
   ngOnInit(): void {
+    let params = this.activatedRoute.params;
+    if (params && params.value && params.value.id) {
+      this.id = params.value.id;
+      this.service.getClienteById(this.id).subscribe(
+        (response) => (this.cliente = response),
+        (errorResponse) => (this.cliente = new Cliente())
+      );
+    }
   }
 
-  voltarParaListagem(){
-    this.router.navigate(['/clientes-lista'])
+  voltarParaListagem() {
+    this.router.navigate(['/clientes-lista']);
   }
 
-  onSubmit(){
-    this.service
-        .salvar(this.cliente)
-        .subscribe( response => {
+  onSubmit() {
+    if (this.id) {
+      this.service.atualizar(this.cliente).subscribe(
+        (response) => {
           this.success = true;
           this.errors = null;
-          this.cliente = response;
-        } , errorResponse => {
-          this.success = false;
-          this.errors = errorResponse.error.errors;
+        },
+        (errorResponse) => {
+          this.errors = ['Erro ao atualizar o cliente.'];
         }
-        )
+      );
+    } else {
+    }
 
+    this.service.salvar(this.cliente).subscribe(
+      (response) => {
+        this.success = true;
+        this.errors = null;
+        this.cliente = response;
+      },
+      (errorResponse) => {
+        this.success = false;
+        this.errors = errorResponse.error.errors;
+      }
+    );
   }
-
 }
