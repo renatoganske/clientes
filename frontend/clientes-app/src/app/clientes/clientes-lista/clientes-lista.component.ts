@@ -13,21 +13,32 @@ export class ClientesListaComponent implements OnInit {
 
   clientes: Cliente[] = [];
   clienteSelecionado: Cliente;
+  mensagemSucesso: string;
+  mensagemErro: string;
 
-  constructor(private service : ClientesService,
-    private router : Router) { }
+  constructor(private service: ClientesService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.service
       .getClientes()
-      .subscribe( response => this.clientes = response)
+      .subscribe(response => this.clientes = response)
   }
 
-  novoCadastro(){
+  novoCadastro() {
     this.router.navigate(['/clientes-form']);
   }
 
-  preparaDelecao(cliente: Cliente){
+  preparaDelecao(cliente: Cliente) {
     this.clienteSelecionado = cliente;
+  }
+
+  deletarCliente() {
+    this.service.deletar(this.clienteSelecionado)
+      .subscribe(response => {
+        this.mensagemSucesso = 'Cliente excluído com sucesso!',
+        this.ngOnInit();
+      },
+        erro => this.mensagemErro = 'Ocorreu um erro ao excluir o cliente.')
   }
 }
