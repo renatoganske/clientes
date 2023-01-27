@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface ServicoPrestadoRepository extends JpaRepository<ServicoPrestado, Integer> {
     @Query("select s from ServicoPrestado s join s.cliente c where upper( c.nome ) like upper( :nome ) and MONTH( s.data ) =:mes")
-    List<ServicoPrestado> finByNomeClienteAndMes(String nome, @Param("mes") Integer mes);
+    List<ServicoPrestado> findByNomeClienteAndMes(String nome, @Param("mes") Integer mes);
 }
