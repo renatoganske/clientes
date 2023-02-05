@@ -12,9 +12,7 @@
           Cliente salvo/atualizado com sucesso!
         </div>
         <div
-          class="alert alert-danger"
-          role="alert"
-          *ngFor="let erro of errors"
+          class="alert alert-danger" role="alert" *ngFor="let erro of errors"
         >
           {{ erro }}
         </div>
@@ -26,11 +24,8 @@
         <div class="form-group">
           <label>ID:</label>
           <input
-            type="text"
-            [ngModel]="cliente.id"
-            name="id"
-            class="form-control"
-            disabled="true"
+            type="text" [ngModel]="cliente.id" name="id" 
+            class="form-control" disabled="true"
           />
         </div>
       </div>
@@ -39,11 +34,8 @@
         <div class="form-group">
           <label>Data de Cadastro:</label>
           <input
-            type="text"
-            class="form-control"
-            name="dataCadastro"
-            [ngModel]="cliente.dataCadastro"
-            disabled="true"
+            type="text" class="form-control" name="dataCadastro"
+            [ngModel]="cliente.dataCadastro" disabled="true"
           />
         </div>
       </div>
@@ -54,10 +46,8 @@
         <div class="form-group">
           <label>Nome: *</label>
           <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="cliente.nome"
-            name="nome"
+            type="text" class="form-control"
+            [(ngModel)]="cliente.nome" name="nome"
           />
         </div>
       </div>
@@ -66,10 +56,8 @@
         <div class="form-group">
           <label>CPF: *</label>
           <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="cliente.cpf"
-            name="cpf"
+            type="text" class="form-control"
+            [(ngModel)]="cliente.cpf" name="cpf"
           />
         </div>
       </div>

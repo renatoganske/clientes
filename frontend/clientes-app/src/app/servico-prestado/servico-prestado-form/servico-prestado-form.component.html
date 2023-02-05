@@ -42,11 +42,8 @@
         <div class="form-group">
           <label>Descrição:</label>
           <input
-            class="form-control"
-            [(ngModel)]="servico.descricao"
-            type="text"
-            name="descricao"
-            id="inputDescricao"
+            class="form-control" [(ngModel)]="servico.descricao"
+            type="text" name="descricao" id="inputDescricao"
           />
         </div>
       </div>
@@ -57,11 +54,8 @@
         <div class="form-group">
           <label>Data:</label>
           <input
-            class="form-control"
-            [(ngModel)]="servico.data"
-            type="text"
-            name="data"
-            id="inputData"
+            class="form-control" [(ngModel)]="servico.data" type="text"
+            name="data" id="inputData"
           />
         </div>
       </div>
@@ -69,11 +63,8 @@
         <div class="form-group">
           <label>Preço:</label>
           <input
-            class="form-control"
-            [(ngModel)]="servico.preco"
-            type="text"
-            name="preco"
-            id="inputPreco"
+            class="form-control" [(ngModel)]="servico.preco" type="text"
+            name="preco" id="inputPreco"
           />
         </div>
       </div>
@@ -86,7 +77,7 @@
           Salvar
         </button>
 
-        <button type="button" routerLink="/servico-prestado-listagem" class="btn btn-danger ml-1">
+        <button type="button" routerLink="/servicos-prestados/lista" class="btn btn-danger ml-1">
           <i class="fa fa-arrow-alt-circle-left"></i>
           Voltar
         </button>
